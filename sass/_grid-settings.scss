@@ -1,0 +1,16 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "neat/neat-helpers"; 
+
+// Change the grid settings
+$column: 90px;
+$gutter: 30px;
+$grid-columns: 16;
+$max-width: em(1088);
+
+$visual-grid: true;
+// Define your breakpoints
+$tablet: new-breakpoint(max-width 1024px 11);
+$tablet: new-breakpoint(max-width 768px 8);
+$mobile: new-breakpoint(max-width 480px 4);

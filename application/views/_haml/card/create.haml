@@ -1,0 +1,62 @@
+!!! 5
+%html
+    %head
+        %title Riffei
+        %meta{'http-equiv' => 'Content-Type', :content => 'text/html'}/
+        %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}/
+
+        %script{:type => "text/javascript", :src  => "http://code.jquery.com/jquery-1.10.2.min.js"}
+        %script{:type => "text/javascript", :src  => "http://code.jquery.com/ui/1.10.3/jquery-ui.js"}
+        
+        %link(rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css")
+        
+        %link(rel="stylesheet" type="text/css" href="../stylesheets/screen.css")
+        %link(rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Oswald:400,300&subset=latin,latin-ext' rel='stylesheet' rel='stylesheet")
+        / %link(rel="stylesheet" type="text/css" href="stylesheets/print.css")
+        /[if IE]
+            %link(rel="stylesheet" type="text/css" href="stylesheets/ie.css")
+%body
+    .container
+        %section.header
+        #register-form
+            %p.heading
+            <?php echo form_open('cards/save'); ?>
+            <?php echo validation_errors('<p class="error">','</p>'); ?>
+            %p
+                %label{:for => "title"} Title:
+                <?php echo form_input('title',set_value('title')); ?>
+            %p
+                %label{:for => "description"} Description:
+                <?php echo form_input('title',set_value('description')); ?>     
+                
+            
+            %fieldset
+                %ol
+                    %li
+                        %label{:for => "title"} Title:
+                        %input{:type => "text", :name => "title", :class => "text"}
+                    %li
+                        %label{:for => "description"} Description:
+                        %input{:type => "text", :name => "description", :class => "text"}
+                    %li
+                        %label{:for => "category"} Category:
+                        %input{:type => "text", :name => "category", :class => "text"}
+                    %li
+                        %label{:for => "tags"} Tags:
+                        %input{:type => "text", :name => "tags", :class => "text"}
+                    %li
+                        %label{:for => "value"} Value:
+                        %input{:type => "text", :name => "value", :class => "text"}
+                    %li
+                        %label{:for => "expiration"} Expiration date:
+                        %input{:type => "text", :name => "expiration", :class => "text", :id => "datepicker"}
+                    %li
+                        %label{:for => "images"} Images:
+                        %input{:type => "text", :name => "images", :class => "text"}
+                    %li
+                        %label{:for => "user_id"} User_id:
+                        %input{:type => "text", :name => "user_id", :class => "text"}
+                  
+                    %input{:type => "submit", :value => "Create", :class => "button"}
+        
+    %script{:type => "text/javascript", :src  => "../js/code.js"}

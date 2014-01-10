@@ -1,0 +1,52 @@
+!!! 5
+%html
+    %head
+        %title Riffei
+        %meta{'http-equiv' => 'Content-Type', :content => 'text/html'}/
+        %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}/
+
+        %script{:type => "text/javascript", :src  => "http://code.jquery.com/jquery-1.10.2.min.js"}
+        %script{:type => "text/javascript", :src  => "http://code.jquery.com/ui/1.10.3/jquery-ui.js"}
+        
+        %link(rel="stylesheet" type="text/css" href="../stylesheets/screen.css")
+        %link(rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Oswald:400,300&subset=latin,latin-ext' rel='stylesheet' rel='stylesheet")
+        / %link(rel="stylesheet" type="text/css" href="stylesheets/print.css")
+        /[if IE]
+            %link(rel="stylesheet" type="text/css" href="stylesheets/ie.css")
+%body
+    .container
+        <?php foreach($cards as $card): ?>
+        %section.header
+        %section.card
+            %section.top
+                %span#countdown.cont
+            <?php foreach($tickets as $ticket): ?>
+            %span{:id => '<?= $ticket->id; ?>', :class => 'unity'}
+                %img{:src => "<?= $ticket->User->avatar ?>", :width => "50", :height => "50"}
+            <?php endforeach; ?>
+            %span{:id => 'send', :class => 'btn-send'}
+       
+        %aside.info
+            %h1 <?= $card->title ?>
+            %h2 R$ <?= $card->value ?>
+            %p
+                %a{:href => "<?= base_url() ?>users/<?= $card->User->id ?>"} From: <?= $card->User->username ?>
+            %img{:src => "<?= $card->images ?>",:width => "50", :height => "50"}
+            %h3 
+                Raffle Day: <br/>
+                <?php 
+                $date = date_create("$card->expiration");
+                
+                ?>
+            %p <?= $card->description ?>
+            %p <?= $card->category ?>
+            %p <?= $card->tags ?>
+            
+ 
+        
+        <?php endforeach; ?>
+    :javascript
+        endDate = '<?php echo date_format($date,"M d, Y"); ?>' ;
+    %script{:type => "text/javascript", :src  => "../js/code.js"}
+    
+
