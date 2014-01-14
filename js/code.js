@@ -10,7 +10,7 @@
 //--------------
 
 
-
+var baseUrl;
 var list = [];
 var sort = list.sort();
 $('.unity').click(function (ev) {
@@ -33,7 +33,7 @@ $('.unity').click(function (ev) {
         // Verify and remove duplicated entry
         b = removeDuplicates(b);
 
-        console.log(list);
+        console.log(list+" -> "+ user_id);
     }
     else{
         // Change the ticket stat to unselected
@@ -44,14 +44,22 @@ $('.unity').click(function (ev) {
         
         // Verify and remove duplicated entry
         b = removeDuplicates(list);
-        console.log(list);
+        console.log(list+" user_id "+ user_id);
     };
 });
 
 
 // Check-ou button
-$('span#send').click(function () { 
-    console.log("final: "+list);
+$('input#btn-comprar').click(function () { 
+    
+
+    /*$.post( baseUrl+"/cards/checkout/", { items: list, user_id: "user_id" })
+      .done(function( data ) {
+        alert( "Data Loaded: " + data );
+      });*/
+    
+    $().redirect(baseUrl+"cards/checkout/", {'items': list, 'user_id': user_id});
+    console.log(user_id+" comprou -> "+list);
 });
 
 function removeDuplicates(arr){

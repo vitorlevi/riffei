@@ -30,15 +30,17 @@ class Current_User {
 	public static function login($username, $password) {
 		
 		// get User object by username 
-		if ($u = Doctrine::getTable('User')->find('2')) {
+		if ($u = Doctrine::getTable('User')->findOneByUsername($username)) {
 			
-	
+	       
 			// to ge the mutated version of the input password
-			$u_input = new User();
-			$u_input->password = $password;
+			/*$u_input = new User();
+			$u_input->password = $password;*/
+            
+             $md5pass = md5($password);
 			
 			// password match
-			if ($u->password == $u_input->password) {
+			if ($u->password == $md5pass) {
 				unset($u_input);
 				
 				$CI =& get_instance();
@@ -47,13 +49,16 @@ class Current_User {
 				self::$user = $u;
 				
 				return TRUE;
+                
 			}
 			
 			unset($u_input);
+            
 		}
 		
 		// login failed
 		return FALSE;
+        
 		
 	}
 		

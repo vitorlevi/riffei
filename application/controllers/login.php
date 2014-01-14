@@ -17,8 +17,12 @@ class Login extends Controller {
 		if ($this->_submit_validate() === FALSE) {
 			$this->index();
 			return;
-		}
+
+		}else{
         redirect('home');
+        }
+        
+        
         
 	}
 
@@ -35,6 +39,8 @@ class Login extends Controller {
 	}
 
 	public function authenticate() {
+        
+        //echo "/ autenticate /"+$this->input->post('password');
 
 		return Current_User::login($this->input->post('username'),
 									$this->input->post('password'));

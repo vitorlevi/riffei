@@ -30,13 +30,13 @@ class Cards extends Controller {
         echo $id;
 	}
     
-    function create()
+    public function create()
 	{
         $this->load->view('card/create');
     }
     
     
-    function save()
+    public function save()
 	{
 		$c = new Card();
         
@@ -59,7 +59,7 @@ class Cards extends Controller {
             $t = new Ticket();
             $t->name	= $names[$i-1];
             $t->card_id	= $c->id;
-            $t->user_id	= "1" ;
+            $t->user_id	= $c->user_id ;
             $t->value	= $c->value / $unity ;
         
             $t->save();
@@ -67,10 +67,33 @@ class Cards extends Controller {
         }
         redirect('/cards/'.$t->card_id);
 	}
+    
+    public function checkout()
+	{
+        $user_id     = $this->input->post('user_id');
+        $items       = $this->input->post('items');
+        
+        
+        $pieces = explode(",", $items);
+        $arrayLength = count($pieces);
+        
+        $arrayLength = $arrayLength -1;
+        for ($i = 0; $i <= $arrayLength; $i++){
+            echo $user_id." -> ".$pieces[$i]."<br>";
+            
+
+            $u = Doctrine::getTable('Ticket')->find($pieces[$i]);
+            
+            $u->user_id = $user_id;
+            
+            $u->save();
+        }
+    
+    }
 }
 
-/* End of file welcome.php */
-/* Location: ./system/application/controllers/card.php */
+/* End of file cards.php */
+/* Location: ./system/application/controllers/cards.php */
 
 
  

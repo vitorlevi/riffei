@@ -41,7 +41,7 @@ class User extends Doctrine_Record {
 	}
 
 	protected function _encrypt_password($value) {
-		$salt = '#*seCrEt!@-*%';
-		$this->_set('password', md5($salt . $value));
+		//$salt = '#*seCrEt!@-*%';
+		$this->_set('password', $value);
 	}
 }

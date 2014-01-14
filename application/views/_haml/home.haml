@@ -15,9 +15,12 @@
     .container
         %section.header
         <?php if(Current_User::user()): ?>
-        %h2 Hello <em><?php echo Current_User::user()->username; ?></em>
-        %h2 <?php echo anchor('logout','Logout'); ?>
+        %h2 Hello <em><?= Current_User::user()->username; ?></em>
+        %h3 ID: <em><?= Current_User::user()->id; ?></em>
+        %h2 <?= anchor('logout','Logout'); ?>
         <?php else: ?>
-        %h2 New Users: <?php echo anchor('signup','Create an Account'); ?>.
-        %h2 Members: <?php echo anchor('login','Login'); ?>.
+        %h2 New Users: <?= anchor('users/register','Create an Account'); ?>.
+        %h2
+            Members: 
+            %a{:href => "login/"} Login
         <?php endif; ?>

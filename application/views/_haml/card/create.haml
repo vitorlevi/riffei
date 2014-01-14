@@ -17,19 +17,23 @@
             %link(rel="stylesheet" type="text/css" href="stylesheets/ie.css")
 %body
     .container
-        %section.header
+    
+        %section.header            
+            <?php if(Current_User::user()): ?>
+            %h2 Hello <em><?= Current_User::user()->username; ?></em>
+            %h3 ID: <em><?= Current_User::user()->id; ?></em>
+            %h2 <?= anchor('logout','Logout'); ?>
+            <?php else: ?>
+            %h2 New Users: <?= anchor('users/register','Create an Account'); ?>.
+            %h2
+                Members: 
+                %a{:href => "login/"} Login
+            <?php endif; ?>
         #register-form
             %p.heading
             <?php echo form_open('cards/save'); ?>
             <?php echo validation_errors('<p class="error">','</p>'); ?>
-            %p
-                %label{:for => "title"} Title:
-                <?php echo form_input('title',set_value('title')); ?>
-            %p
-                %label{:for => "description"} Description:
-                <?php echo form_input('title',set_value('description')); ?>     
-                
-            
+     
             %fieldset
                 %ol
                     %li
@@ -53,9 +57,8 @@
                     %li
                         %label{:for => "images"} Images:
                         %input{:type => "text", :name => "images", :class => "text"}
-                    %li
-                        %label{:for => "user_id"} User_id:
-                        %input{:type => "text", :name => "user_id", :class => "text"}
+
+                        %input{:type => "hidden", :name => "user_id", :class => "text", :value => '<?= Current_User::user()->id; ?>'}
                   
                     %input{:type => "submit", :value => "Create", :class => "button"}
         

@@ -17,19 +17,23 @@
 </html>
 <body>
   <div class='container'>
-    <section class='header'></section>
+    <section class='header'>
+      <?php if(Current_User::user()): ?>
+      <h2>Hello <em><?= Current_User::user()->username; ?></em></h2>
+      <h3>ID: <em><?= Current_User::user()->id; ?></em></h3>
+      <h2><?= anchor('logout','Logout'); ?></h2>
+      <?php else: ?>
+      <h2>New Users: <?= anchor('users/register','Create an Account'); ?>.</h2>
+      <h2>
+        Members:
+        <a href='login/'>Login</a>
+      </h2>
+      <?php endif; ?>
+    </section>
     <div id='register-form'>
       <p class='heading'></p>
       <?php echo form_open('cards/save'); ?>
       <?php echo validation_errors('<p class="error">','</p>'); ?>
-      <p>
-        <label for='title'>Title:</label>
-        <?php echo form_input('title',set_value('title')); ?>
-      </p>
-      <p>
-        <label for='description'>Description:</label>
-        <?php echo form_input('title',set_value('description')); ?>
-      </p>
       <fieldset>
         <ol>
           <li>
@@ -59,10 +63,7 @@
           <li>
             <label for='images'>Images:</label>
             <input class='text' name='images' type='text' />
-          </li>
-          <li>
-            <label for='user_id'>User_id:</label>
-            <input class='text' name='user_id' type='text' />
+            <input class='text' name='user_id' type='hidden' value='<?= Current_User::user()->id; ?>' />
           </li>
           <input class='button' type='submit' value='Create' />
         </ol>

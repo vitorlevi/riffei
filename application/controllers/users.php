@@ -89,6 +89,7 @@ class Users extends Controller {
         $u->save();
         //$this->load->view('user/sucess');
         redirect('/users/'.$u->id);
+        redirect('/login/');
 	}
     
     private function _submit_validate() {
